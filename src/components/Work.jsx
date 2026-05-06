@@ -26,7 +26,7 @@ const PROJECTS = [
     id: 'project-2',
     title: 'Fashion Shopify Store',
     description:
-      'A high-converting Shopify store for a fashion brand with custom liquid templates, product upsells, and a seamless checkout experience.',
+      'A high-converting Shopify store for a fashion brand with custom liquid templates, product upsells, and seamless checkout.',
     services: ['Shopify', 'Liquid', 'UI Design'],
     type: 'eCommerce',
     imageUrl:
@@ -34,9 +34,9 @@ const PROJECTS = [
   },
   {
     id: 'project-3',
-    title: 'SaaS Dashboard App',
+    title: 'SaaS Analytics Dashboard',
     description:
-      'A React-based SaaS analytics dashboard with real-time data visualisation, role-based access, and a clean dark-mode interface.',
+      'A React-based SaaS dashboard with real-time data visualisation, role-based access, and a clean dark-mode interface.',
     services: ['React', 'Laravel API', 'TailwindCSS'],
     type: 'SaaS',
     imageUrl:
@@ -46,7 +46,7 @@ const PROJECTS = [
     id: 'project-4',
     title: 'Restaurant Booking Platform',
     description:
-      'An online reservation system for a restaurant chain with table management, email confirmations, and an admin panel built in PHP/Laravel.',
+      'An online reservation system with table management, email confirmations, and an admin panel built in PHP/Laravel.',
     services: ['PHP', 'Laravel', 'MySQL'],
     type: 'Web App',
     imageUrl:
@@ -66,8 +66,8 @@ const PROJECTS = [
     id: 'project-6',
     title: 'Health & Wellness Shopify',
     description:
-      'A performance-optimised Shopify store for a supplements brand featuring subscription products, bundle builders, and loyalty integrations.',
-    services: ['Shopify', 'Klaviyo', 'Conversion CRO'],
+      'A performance-optimised Shopify store for a supplements brand featuring subscription products and loyalty integrations.',
+    services: ['Shopify', 'Klaviyo', 'CRO'],
     type: 'eCommerce',
     imageUrl:
       'https://images.unsplash.com/photo-1505576399279-565b52d4ac71?q=80&w=2487&auto=format&fit=crop',
@@ -76,8 +76,8 @@ const PROJECTS = [
     id: 'project-7',
     title: 'Taxi Booking Web App',
     description:
-      'A real-time ride-booking application with live driver tracking, fare estimation, payment gateway integration, and a driver management panel.',
-    services: ['React', 'Node.js', 'Google Maps API'],
+      'A real-time ride-booking app with live driver tracking, fare estimation, payment gateway integration, and a driver panel.',
+    services: ['React', 'Node.js', 'Maps API'],
     type: 'Web App',
     imageUrl:
       'https://images.unsplash.com/photo-1511818966892-d7d671e672a2?q=80&w=2487&auto=format&fit=crop',
@@ -85,66 +85,123 @@ const PROJECTS = [
 ]
 
 const TYPE_COLORS = {
-  WordPress: 'bg-blue-600',
-  eCommerce: 'bg-emerald-600',
-  SaaS:      'bg-violet-600',
-  'Web App': 'bg-amber-600',
+  WordPress: '#2563eb',
+  eCommerce: '#059669',
+  SaaS:      '#7c3aed',
+  'Web App': '#d97706',
 }
 
 export default function Work() {
   return (
-    <section id="work" className="work-section">
-      <div className="work-header">
-        <span className="section-label">Portfolio</span>
-        <h2 className="section-title">My Work</h2>
-        <p className="section-sub">
-          A selection of projects I&apos;ve designed and built — from WordPress sites and Shopify stores to full-stack web applications.
-        </p>
-      </div>
-
-      <ScrollXCarousel className="h-[180vh]">
-        <ScrollXCarouselContainer className="h-dvh flex flex-col justify-center gap-6 py-10">
-
+    <section id="work" style={{ padding: 0, overflow: 'hidden', background: 'var(--bg)' }}>
+      <ScrollXCarousel style={{ height: '220vh' }}>
+        <ScrollXCarouselContainer
+          style={{
+            height: '100dvh',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'center',
+            gap: '1.5rem',
+            paddingTop: '2rem',
+            paddingBottom: '2rem',
+            position: 'sticky',
+            top: 0,
+          }}
+        >
+          {/* Fade edges */}
           <div className="work-fade-left" />
           <div className="work-fade-right" />
 
+          {/* Section header — inside sticky so it's always visible */}
+          <div style={{ padding: '0 5%', flexShrink: 0 }}>
+            <span className="section-label">Portfolio</span>
+            <h2 style={{ fontSize: 'clamp(1.8rem, 3vw, 2.4rem)', fontWeight: 800, color: 'var(--text)', letterSpacing: '-0.5px', marginBottom: '0.4rem' }}>
+              My Work
+            </h2>
+            <p style={{ color: 'var(--muted)', fontSize: '0.95rem', maxWidth: 500 }}>
+              A selection of projects I&apos;ve designed and built — from WordPress sites and Shopify stores to full-stack web applications.
+            </p>
+          </div>
+
+          {/* Carousel cards */}
           <ScrollXCarouselWrap
-            xRagnge={['-0%', '-62%']}
-            className="flex space-x-6 pl-8"
+            xRagnge={['-0%', '-75%']}
+            style={{ display: 'flex', gap: '1.25rem', paddingLeft: '5%', flexShrink: 0 }}
           >
             {PROJECTS.map((project) => (
               <CardHoverReveal
                 key={project.id}
-                className="min-w-[78vw] sm:min-w-[44vw] lg:min-w-[32vw] xl:min-w-[26vw] shadow-2xl rounded-2xl border border-white/10"
+                style={{
+                  minWidth: 'min(72vw, 320px)',
+                  borderRadius: '1rem',
+                  overflow: 'hidden',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  boxShadow: '0 20px 60px rgba(0,0,0,0.5)',
+                  flexShrink: 0,
+                }}
               >
-                <CardHoverRevealMain className="h-[420px] sm:h-[460px]">
+                <CardHoverRevealMain style={{ height: 'min(52vh, 400px)' }}>
                   <img
                     src={project.imageUrl}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
                     loading="lazy"
                   />
                 </CardHoverRevealMain>
 
-                <CardHoverRevealContent className="space-y-3 rounded-2xl bg-black/55 backdrop-blur-2xl p-4">
-                  <div className="flex items-center gap-2 flex-wrap">
-                    <Badge className={`capitalize rounded-full text-white border-0 ${TYPE_COLORS[project.type] ?? 'bg-indigo-600'}`}>
+                {/* Always-visible bottom label */}
+                <div className="work-card-label">
+                  <span className="work-card-type" style={{ background: TYPE_COLORS[project.type] ?? '#4f46e5' }}>
+                    {project.type}
+                  </span>
+                  <span className="work-card-title">{project.title}</span>
+                </div>
+
+                <CardHoverRevealContent
+                  style={{
+                    background: 'rgba(0,0,0,0.72)',
+                    backdropFilter: 'blur(20px)',
+                    borderRadius: '0.75rem',
+                    padding: '1rem',
+                    inset: 'auto 0.75rem 0.75rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '0.6rem',
+                  }}
+                >
+                  <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.4rem' }}>
+                    <span
+                      style={{
+                        background: TYPE_COLORS[project.type] ?? '#4f46e5',
+                        color: '#fff',
+                        borderRadius: '999px',
+                        padding: '2px 10px',
+                        fontSize: '0.72rem',
+                        fontWeight: 600,
+                      }}
+                    >
                       {project.type}
-                    </Badge>
+                    </span>
                     {project.services.map((s) => (
-                      <Badge
+                      <span
                         key={s}
-                        variant="secondary"
-                        className="capitalize rounded-full bg-white/10 text-white/80 border-0 text-[11px]"
+                        style={{
+                          background: 'rgba(255,255,255,0.1)',
+                          color: 'rgba(255,255,255,0.75)',
+                          borderRadius: '999px',
+                          padding: '2px 10px',
+                          fontSize: '0.72rem',
+                          fontWeight: 500,
+                        }}
                       >
                         {s}
-                      </Badge>
+                      </span>
                     ))}
                   </div>
-                  <h3 className="text-white font-semibold text-base leading-tight">
+                  <p style={{ fontWeight: 600, color: '#fff', fontSize: '0.9rem', lineHeight: 1.3 }}>
                     {project.title}
-                  </h3>
-                  <p className="text-white/70 text-sm leading-relaxed">
+                  </p>
+                  <p style={{ color: 'rgba(255,255,255,0.65)', fontSize: '0.8rem', lineHeight: 1.6 }}>
                     {project.description}
                   </p>
                 </CardHoverRevealContent>
@@ -152,10 +209,13 @@ export default function Work() {
             ))}
           </ScrollXCarouselWrap>
 
-          <ScrollXCarouselProgress
-            className="mx-8 h-[2px] rounded-full bg-white/10 overflow-hidden"
-            progressStyle="size-full bg-white/60 rounded-full"
-          />
+          {/* Progress bar */}
+          <div style={{ padding: '0 5%', flexShrink: 0 }}>
+            <ScrollXCarouselProgress
+              className="work-progress-track"
+              progressStyle="work-progress-bar"
+            />
+          </div>
         </ScrollXCarouselContainer>
       </ScrollXCarousel>
     </section>

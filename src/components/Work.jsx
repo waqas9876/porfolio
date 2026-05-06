@@ -94,7 +94,7 @@ const TYPE_COLORS = {
 export default function Work() {
   return (
     <section id="work" style={{ padding: 0, overflow: 'hidden', background: 'var(--bg)' }}>
-      <ScrollXCarousel style={{ height: '220vh' }}>
+      <ScrollXCarousel style={{ height: '160vh' }}>
         <ScrollXCarouselContainer
           style={{
             height: '100dvh',

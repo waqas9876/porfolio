@@ -74,7 +74,7 @@ export function ParallaxComponent() {
               className="parallax__layer-img"
             />
             <div data-parallax-layer="3" className="parallax__layer-title">
-              <h2 className="parallax__title">WAQAS</h2>
+              <h2 className="parallax__title">WELCOME</h2>
             </div>
             <img
               src="https://cdn.prod.website-files.com/671752cd4027f01b1b8f1c7f/6717795bb5aceca85011ad83_osmo-parallax-layer-1.webp"

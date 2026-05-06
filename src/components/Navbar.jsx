@@ -3,14 +3,10 @@ import { useEffect, useRef, useState } from 'react'
 export default function Navbar() {
   const navRef = useRef(null)
   const [open, setOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
 
   useEffect(() => {
-    const nav = navRef.current
-    const handleScroll = () => {
-      nav.style.background = window.scrollY > 60
-        ? 'rgba(248,248,248,0.98)'
-        : 'rgba(248,248,248,0.92)'
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 60)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
@@ -23,7 +19,7 @@ export default function Navbar() {
   }
 
   return (
-    <nav id="navbar" ref={navRef} className={open ? 'open' : ''}>
+    <nav id="navbar" ref={navRef} className={`${open ? 'open' : ''} ${scrolled ? 'scrolled' : ''}`}>
       <a href="#hero" className="nav-logo" onClick={(e) => handleNavLink(e, '#hero')}>WJ.</a>
       <div className="nav-links">
         {['#about','#experience','#skills','#education','#testimonials','#contact'].map(href => (

@@ -72,7 +72,7 @@ export const ContainerSticky = ({
 }: React.HTMLAttributes<HTMLDivElement>) => {
   return (
     <div
-      className={cn("sticky left-0 top-0 min-h-[30rem] w-full overflow-hidden", className)}
+      className={cn("sticky left-0 top-0 min-h-[30rem] w-full", className)}
       style={{
         perspective: "1000px",
         perspectiveOrigin: "center top",
@@ -93,8 +93,8 @@ export const GalleryContainer = ({
   ...props
 }: React.HTMLAttributes<HTMLDivElement> & HTMLMotionProps<"div">) => {
   const { scrollYProgress } = useContainerScrollContext()
-  const rotateX = useTransform(scrollYProgress, [0, 0.5], [75, 0])
-  const scale = useTransform(scrollYProgress, [0.5, 0.9], [1.2, 1])
+  const rotateX = useTransform(scrollYProgress, [0, 0.6], [40, 0])
+  const scale = useTransform(scrollYProgress, [0.5, 1], [1.1, 1])
   return (
     <motion.div
       className={cn("relative grid size-full grid-cols-3 gap-2 rounded-2xl", className)}

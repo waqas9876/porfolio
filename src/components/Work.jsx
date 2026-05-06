@@ -1,7 +1,5 @@
 import {
-  ContainerAnimated,
   ContainerScroll,
-  ContainerStagger,
   ContainerSticky,
   GalleryCol,
   GalleryContainer,
@@ -34,22 +32,16 @@ export default function Work() {
     <section id="work" className="work-ag-section">
 
       {/* ── Header ── */}
-      <ContainerStagger className="work-ag-header">
-        <ContainerAnimated>
-          <span className="section-label">Portfolio</span>
-        </ContainerAnimated>
-        <ContainerAnimated>
-          <h2 className="work-ag-title">
-            My <span className="work-ag-title-accent">Work</span>
-          </h2>
-        </ContainerAnimated>
-        <ContainerAnimated>
-          <p className="work-ag-desc">
-            From WordPress sites and Shopify stores to full-stack web applications —
-            built with performance, design, and real results in mind.
-          </p>
-        </ContainerAnimated>
-        <ContainerAnimated className="work-ag-btns">
+      <div className="work-ag-header">
+        <span className="section-label">Portfolio</span>
+        <h2 className="work-ag-title">
+          My <span className="work-ag-title-accent">Work</span>
+        </h2>
+        <p className="work-ag-desc">
+          From WordPress sites and Shopify stores to full-stack web applications —
+          built with performance, design, and real results in mind.
+        </p>
+        <div className="work-ag-btns">
           <a href="mailto:mwaqasjaved2300@gmail.com" className="work-ag-btn-primary">
             <MailIcon size={16} />
             Hire Me
@@ -58,8 +50,8 @@ export default function Work() {
             View All
             <ArrowRightIcon size={15} />
           </a>
-        </ContainerAnimated>
-      </ContainerStagger>
+        </div>
+      </div>
 
       {/* ── Ambient glow ── */}
       <div className="work-ag-glow" />

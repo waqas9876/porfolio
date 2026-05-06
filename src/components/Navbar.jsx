@@ -1,0 +1,41 @@
+import { useEffect, useRef, useState } from 'react'
+
+export default function Navbar() {
+  const navRef = useRef(null)
+  const [open, setOpen] = useState(false)
+
+  useEffect(() => {
+    const nav = navRef.current
+    const handleScroll = () => {
+      nav.style.background = window.scrollY > 60
+        ? 'rgba(248,248,248,0.98)'
+        : 'rgba(248,248,248,0.92)'
+    }
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  const handleNavLink = (e, href) => {
+    e.preventDefault()
+    setOpen(false)
+    const target = document.querySelector(href)
+    if (target) target.scrollIntoView({ behavior: 'smooth' })
+  }
+
+  return (
+    <nav id="navbar" ref={navRef} className={open ? 'open' : ''}>
+      <a href="#hero" className="nav-logo" onClick={(e) => handleNavLink(e, '#hero')}>WJ.</a>
+      <div className="nav-links">
+        {['#about','#experience','#skills','#education','#testimonials','#contact'].map(href => (
+          <a key={href} href={href} onClick={(e) => handleNavLink(e, href)}>
+            {href.slice(1).charAt(0).toUpperCase() + href.slice(2)}
+          </a>
+        ))}
+      </div>
+      <a href="mailto:mwaqasjaved2300@gmail.com" className="nav-btn">Hire Me</a>
+      <div className="hamburger" onClick={() => setOpen(o => !o)}>
+        <span /><span /><span />
+      </div>
+    </nav>
+  )
+}

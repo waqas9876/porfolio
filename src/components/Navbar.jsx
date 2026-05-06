@@ -22,7 +22,7 @@ export default function Navbar() {
     <nav id="navbar" ref={navRef} className={`${open ? 'open' : ''} ${scrolled ? 'scrolled' : ''}`}>
       <a href="#hero" className="nav-logo" onClick={(e) => handleNavLink(e, '#hero')}>WJ.</a>
       <div className="nav-links">
-        {['#about','#experience','#skills','#education','#testimonials','#contact'].map(href => (
+        {['#about','#experience','#skills','#work','#education','#testimonials','#contact'].map(href => (
           <a key={href} href={href} onClick={(e) => handleNavLink(e, href)}>
             {href.slice(1).charAt(0).toUpperCase() + href.slice(2)}
           </a>

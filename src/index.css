@@ -315,14 +315,33 @@ footer { position: relative; background: var(--card); border-radius: 24px; overf
 .exp-card-wrap.is-hovered .exp-card-line { width: 100%; opacity: 1; }
 @media (max-width: 768px) { .exp-gallery-header { min-height: 160px; padding-top: calc(var(--nav-h) + 1rem); padding-bottom: 0.5rem; } .exp-gallery-title { font-size: 2rem; } .exp-card { width: 210px; height: 300px; } .exp-card-content { padding: 13px; } .exp-card-role { font-size: 0.95rem; } }
 
-/* ─── Work / My Work ────────────────────────────────────── */
-.work-fade-left  { pointer-events: none; position: absolute; inset: 0 auto 0 0; width: 10vw; z-index: 10; background: linear-gradient(90deg, var(--bg) 30%, transparent); }
-.work-fade-right { pointer-events: none; position: absolute; inset: 0 0 0 auto; width: 10vw; z-index: 10; background: linear-gradient(270deg, var(--bg) 30%, transparent); }
-.work-card-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 2.5rem 1rem 0.85rem; background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%); display: flex; flex-direction: column; gap: 0.3rem; z-index: 5; }
-.work-card-type  { font-size: 0.7rem; font-weight: 700; color: #fff; border-radius: 999px; padding: 2px 9px; width: fit-content; letter-spacing: 0.3px; }
-.work-card-title { font-size: 0.88rem; font-weight: 600; color: #fff; line-height: 1.3; }
-.work-progress-track { background: rgba(255,255,255,0.1); height: 2px; border-radius: 999px; overflow: hidden; }
-.work-progress-bar   { height: 100%; background: rgba(255,255,255,0.5); border-radius: 999px; }
+/* ─── Work / Animated Gallery ────────────────────────────── */
+.work-ag-section  { position: relative; background: var(--bg); padding: 0; overflow: hidden; }
+.work-ag-header   { position: relative; z-index: 20; text-align: center; padding: 5rem 5% 0; display: flex; flex-direction: column; align-items: center; gap: 0.6rem; }
+.work-ag-title    { font-size: clamp(2.4rem, 5vw, 4rem); font-weight: 900; letter-spacing: -1.5px; color: var(--text); line-height: 1; margin: 0.2rem 0 0.5rem; }
+.work-ag-title-accent { color: rgba(255,255,255,0.35); }
+.work-ag-desc     { font-size: 0.96rem; color: var(--muted); max-width: 480px; line-height: 1.7; text-align: center; }
+.work-ag-btns     { display: flex; gap: 0.75rem; align-items: center; margin-top: 0.75rem; flex-wrap: wrap; justify-content: center; }
+.work-ag-btn-primary { display: inline-flex; align-items: center; gap: 6px; padding: 0.55rem 1.4rem; background: #fff; color: #000; border-radius: 8px; font-size: 0.875rem; font-weight: 700; transition: opacity 0.2s, transform 0.2s; }
+.work-ag-btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+.work-ag-btn-ghost { display: inline-flex; align-items: center; gap: 5px; padding: 0.55rem 1.1rem; border: 1px solid rgba(255,255,255,0.15); color: rgba(255,255,255,0.6); border-radius: 8px; font-size: 0.875rem; font-weight: 500; transition: border-color 0.2s, color 0.2s; }
+.work-ag-btn-ghost:hover { border-color: rgba(255,255,255,0.45); color: #fff; }
+
+/* ambient glow */
+.work-ag-glow { pointer-events: none; position: absolute; top: 0; left: 0; right: 0; height: 60vh; z-index: 5; background: linear-gradient(135deg, #1e1b4b, #312e81, #1e3a5f); filter: blur(90px); opacity: 0.35; mix-blend-mode: screen; }
+
+/* scroll + sticky + grid */
+.work-ag-scroll  { position: relative; height: 350vh; }
+.work-ag-sticky  { height: 100svh; }
+.work-ag-grid    { padding: 1.5rem; gap: 0.75rem; }
+.work-ag-col-offset { margin-top: -0.5rem; }
+.work-ag-col-mid    { margin-top: -50%; }
+.work-ag-img { aspect-ratio: 16/9; width: 100%; height: auto; border-radius: 10px; object-fit: cover; box-shadow: 0 8px 30px rgba(0,0,0,0.5); display: block; }
+
+@media (max-width: 640px) {
+  .work-ag-grid { gap: 0.4rem; padding: 0.75rem; }
+  .work-ag-img  { border-radius: 6px; }
+}
 
 /* Tailwind colour token overrides so shadcn badge variants work */
 :root {

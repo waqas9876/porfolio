@@ -142,17 +142,11 @@ section:nth-child(even) { background: var(--bg2); }
 .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s ease; }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
-/* ─── Skills Split Layout ───────────────────────────────── */
-.skills-split-section { padding: 0; background: var(--bg2); overflow: visible; }
-.skills-split-layout  { display: grid; grid-template-columns: 1fr 1fr; max-width: 1200px; margin: 0 auto; }
-.skills-split-left    { position: sticky; top: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 4rem 3rem 4rem 5%; overflow-y: auto; }
-.skills-split-right   { min-height: 200vh; }
-
-@media (max-width: 900px) {
-  .skills-split-layout { grid-template-columns: 1fr; }
-  .skills-split-left   { position: static; height: auto; padding: 3rem 5% 1.5rem; }
-  .skills-split-right  { min-height: auto; }
-}
+/* ─── Skills Full-width ─────────────────────────────────── */
+.skills-fw-section { padding: 0; background: var(--bg2); overflow: visible; }
+.skills-fw-header  { text-align: center; padding: 4rem 5% 3rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
+.skills-fw-title   { font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -1px; line-height: 1.15; color: var(--text); margin: 0.2rem 0 0; max-width: 640px; }
+.skills-fw-desc    { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 540px; }
 
 /* ─── Skills Accordion ─────────────────────────────────── */
 .skills-accordion-layout { display: flex; align-items: center; gap: 3rem; margin-top: 2.5rem; }

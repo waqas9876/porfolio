@@ -16,21 +16,24 @@ export const StickyCard = ({ i, title, src, progress, range, targetScale }: Card
   const scale = useTransform(progress, range, [1, targetScale])
 
   return (
-    <div className="sticky top-0 flex items-center justify-center py-3">
+    <div className="sticky top-0 flex items-center justify-center">
       <motion.div
         style={{
           scale,
-          top: `calc(-5vh + ${i * 18 + 160}px)`,
+          top: `calc(-5vh + ${i * 20 + 80}px)`,
         }}
-        className="relative origin-top overflow-hidden rounded-2xl
-                   h-[200px] w-[300px]
-                   sm:h-[240px] sm:w-[400px]
-                   md:h-[270px] md:w-[460px]
-                   lg:h-[300px] lg:w-[520px]"
+        className="relative origin-top overflow-hidden w-full"
+        sx={{ height: 'min(60vh, 520px)' }}
       >
-        <img src={src} alt={title} className="h-full w-full object-cover" loading="lazy" />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-        <span className="absolute bottom-4 left-5 text-white font-semibold text-sm tracking-wide">
+        <img
+          src={src}
+          alt={title}
+          className="h-full w-full object-cover"
+          style={{ height: 'min(60vh, 520px)' }}
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent" />
+        <span className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white font-bold text-lg tracking-wide drop-shadow-lg whitespace-nowrap">
           {title}
         </span>
       </motion.div>
@@ -57,10 +60,11 @@ export const ImagesScrollingAnimation = ({ projects }: ImagesScrollingAnimationP
   return (
     <div
       ref={container}
-      className="relative flex w-full flex-col items-center justify-center pb-[40vh] pt-[8vh]"
+      className="relative w-full"
+      style={{ paddingBottom: '40vh' }}
     >
       {projects.map((project, i) => {
-        const targetScale = Math.max(0.65, 1 - (projects.length - i - 1) * 0.08)
+        const targetScale = Math.max(0.6, 1 - (projects.length - i - 1) * 0.07)
         return (
           <StickyCard
             key={`card_${i}`}

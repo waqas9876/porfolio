@@ -27,44 +27,37 @@ const TAGS = ['HTML5','CSS3','Bootstrap','JavaScript','jQuery','PHP','Laravel','
 
 export default function Skills() {
   return (
-    <section id="skills" className="skills-split-section">
-      <div className="skills-split-layout">
+    <section id="skills" className="skills-fw-section">
 
-        {/* ── Sticky left panel ── */}
-        <div className="skills-split-left">
-          <p className="section-label">What I Know</p>
-          <h2 className="skills-accordion-heading">
-            Expertise That Powers<br />Every Project
-          </h2>
-          <p className="skills-accordion-desc">
-            Building fast, responsive web experiences using a full-stack toolkit — from
-            pixel-perfect frontends to robust PHP backends and scalable CMS solutions.
-          </p>
-          <a
-            href="#contact"
-            className="skills-accordion-cta"
-            onClick={(e) => {
-              e.preventDefault()
-              document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
-            }}
-          >
-            Let&apos;s Work Together
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
-            </svg>
-          </a>
-          <p className="section-label" style={{ marginBottom: '0.75rem' }}>Technologies &amp; Tools</p>
-          <div className="tags-grid">
-            {TAGS.map(t => <span key={t} className="tag">{t}</span>)}
-          </div>
+      {/* ── Centered header ── */}
+      <div className="skills-fw-header">
+        <p className="section-label">What I Know</p>
+        <h2 className="skills-fw-title">Expertise That Powers Every Project</h2>
+        <p className="skills-fw-desc">
+          Building fast, responsive web experiences using a full-stack toolkit — from
+          pixel-perfect frontends to robust PHP backends and scalable CMS solutions.
+        </p>
+        <a
+          href="#contact"
+          className="skills-accordion-cta"
+          onClick={(e) => {
+            e.preventDefault()
+            document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' })
+          }}
+        >
+          Let&apos;s Work Together
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <div className="tags-grid" style={{ justifyContent: 'center' }}>
+          {TAGS.map(t => <span key={t} className="tag">{t}</span>)}
         </div>
-
-        {/* ── Scrolling image cards ── */}
-        <div className="skills-split-right">
-          <ImagesScrollingAnimation projects={PROJECTS} />
-        </div>
-
       </div>
+
+      {/* ── Full-width stacking scroll cards ── */}
+      <ImagesScrollingAnimation projects={PROJECTS} />
+
     </section>
   )
 }

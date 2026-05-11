@@ -37,7 +37,10 @@ export default function ScrollAdventure({ pages }) {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting && !exiting.current) {
-          setCurrentPage(1)
+          // positive top → section entering from below (scrolling down) → start at page 1
+          // negative top → section entering from above (scrolling up) → start at last page
+          const fromBottom = entry.boundingClientRect.top > 0
+          setCurrentPage(fromBottom ? 1 : numOfPages)
           lock()
         } else if (!entry.isIntersecting) {
           locked.current = false
@@ -48,7 +51,7 @@ export default function ScrollAdventure({ pages }) {
     )
     observer.observe(el)
     return () => { observer.disconnect(); lenis?.start() }
-  }, [lenis, lock])
+  }, [lenis, lock, numOfPages])
 
   // ── Wheel handler ────────────────────────────────────
   const handleWheel = useCallback((e) => {

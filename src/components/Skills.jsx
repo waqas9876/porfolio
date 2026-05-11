@@ -57,16 +57,15 @@ const PAGES = [
 export default function Skills() {
   return (
     <section id="skills" style={{ padding: 0 }}>
-      <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', background: '#111' }} className="flex flex-col items-center justify-center text-center px-6 py-24 md:py-32">
-        <p className="text-xs font-bold tracking-[4px] uppercase text-white/40 mb-5">What I Do</p>
-        <h2 className="text-4xl md:text-6xl font-black uppercase text-white leading-tight tracking-tight mb-6 max-w-2xl">
-          Skills & Expertise
-        </h2>
-        <div className="w-12 h-[2px] bg-white/20 rounded-full mb-6" />
-        <p className="text-base md:text-lg text-white/55 max-w-lg leading-relaxed">
-          A full-stack toolkit built over 4+ years — covering everything from pixel-perfect
-          frontends and e-commerce stores to robust back-end systems and scalable CMS solutions.
-        </p>
+      <div style={{ padding: '4rem 5%', textAlign: 'center' }}>
+        <div className="container" style={{ margin: '0 auto' }}>
+          <p className="section-label">What I Do</p>
+          <h2 className="section-title">Skills & Expertise</h2>
+          <p className="section-sub" style={{ margin: '0 auto 0' }}>
+            A full-stack toolkit built over 4+ years — covering everything from pixel-perfect
+            frontends and e-commerce stores to robust back-end systems and scalable CMS solutions.
+          </p>
+        </div>
       </div>
       <ScrollAdventure pages={PAGES} />
     </section>

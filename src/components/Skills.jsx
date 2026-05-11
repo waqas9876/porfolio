@@ -57,7 +57,7 @@ const PAGES = [
 export default function Skills() {
   return (
     <section id="skills" style={{ padding: 0 }}>
-      <div className="bg-[#0d0d0d] flex flex-col items-center justify-center text-center px-6 py-24 md:py-32">
+      <div style={{ borderTop: '1px solid rgba(255,255,255,0.08)', borderBottom: '1px solid rgba(255,255,255,0.08)', background: '#111' }} className="flex flex-col items-center justify-center text-center px-6 py-24 md:py-32">
         <p className="text-xs font-bold tracking-[4px] uppercase text-white/40 mb-5">What I Do</p>
         <h2 className="text-4xl md:text-6xl font-black uppercase text-white leading-tight tracking-tight mb-6 max-w-2xl">
           Skills & Expertise

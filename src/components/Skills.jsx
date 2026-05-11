@@ -57,12 +57,13 @@ const PAGES = [
 export default function Skills() {
   return (
     <section id="skills" style={{ padding: 0 }}>
-      <div className="bg-[#0d0d0d] px-6 py-16 text-center">
-        <p className="text-xs font-bold tracking-[4px] uppercase text-white/40 mb-4">What I Do</p>
-        <h2 className="text-4xl md:text-5xl font-black uppercase text-white leading-tight tracking-tight mb-5">
+      <div className="bg-[#0d0d0d] flex flex-col items-center justify-center text-center px-6 py-24 md:py-32">
+        <p className="text-xs font-bold tracking-[4px] uppercase text-white/40 mb-5">What I Do</p>
+        <h2 className="text-4xl md:text-6xl font-black uppercase text-white leading-tight tracking-tight mb-6 max-w-2xl">
           Skills & Expertise
         </h2>
-        <p className="text-base text-white/60 max-w-xl mx-auto leading-relaxed">
+        <div className="w-12 h-[2px] bg-white/20 rounded-full mb-6" />
+        <p className="text-base md:text-lg text-white/55 max-w-lg leading-relaxed">
           A full-stack toolkit built over 4+ years — covering everything from pixel-perfect
           frontends and e-commerce stores to robust back-end systems and scalable CMS solutions.
         </p>

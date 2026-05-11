@@ -57,6 +57,16 @@ const PAGES = [
 export default function Skills() {
   return (
     <section id="skills" style={{ padding: 0 }}>
+      <div className="bg-[#0d0d0d] px-6 py-16 text-center">
+        <p className="text-xs font-bold tracking-[4px] uppercase text-white/40 mb-4">What I Do</p>
+        <h2 className="text-4xl md:text-5xl font-black uppercase text-white leading-tight tracking-tight mb-5">
+          Skills & Expertise
+        </h2>
+        <p className="text-base text-white/60 max-w-xl mx-auto leading-relaxed">
+          A full-stack toolkit built over 4+ years — covering everything from pixel-perfect
+          frontends and e-commerce stores to robust back-end systems and scalable CMS solutions.
+        </p>
+      </div>
       <ScrollAdventure pages={PAGES} />
     </section>
   )

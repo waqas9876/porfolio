@@ -1,7 +1,6 @@
 "use client"
 
 import { motion, useScroll, useTransform } from "framer-motion"
-import ReactLenis from "lenis/react"
 import { useRef } from "react"
 
 interface Project {
@@ -58,29 +57,27 @@ const ImagesScrollingAnimation = ({ projects }: { projects: Project[] }) => {
   })
 
   return (
-    <ReactLenis root>
-      <main
-        ref={container}
-        className="relative flex w-full flex-col items-center justify-center
-                   pb-[50vh] pt-[5vh]
-                   sm:pb-[60vh] sm:pt-[8vh]
-                   lg:pb-[70vh] lg:pt-[10vh]"
-      >
-        {projects.map((project, i) => {
-          const targetScale = Math.max(0.6, 1 - (projects.length - i - 1) * 0.08)
-          return (
-            <StickyCard_001
-              key={`p_${i}`}
-              i={i}
-              {...project}
-              progress={scrollYProgress}
-              range={[i * 0.2, 1]}
-              targetScale={targetScale}
-            />
-          )
-        })}
-      </main>
-    </ReactLenis>
+    <main
+      ref={container}
+      className="relative flex w-full flex-col items-center justify-center
+                 pb-[50vh] pt-[5vh]
+                 sm:pb-[60vh] sm:pt-[8vh]
+                 lg:pb-[70vh] lg:pt-[10vh]"
+    >
+      {projects.map((project, i) => {
+        const targetScale = Math.max(0.6, 1 - (projects.length - i - 1) * 0.08)
+        return (
+          <StickyCard_001
+            key={`p_${i}`}
+            i={i}
+            {...project}
+            progress={scrollYProgress}
+            range={[i * 0.2, 1]}
+            targetScale={targetScale}
+          />
+        )
+      })}
+    </main>
   )
 }
 

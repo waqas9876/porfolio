@@ -1,3 +1,4 @@
+import ReactLenis from 'lenis/react'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -10,7 +11,7 @@ import Footer from './components/Footer'
 
 export default function App() {
   return (
-    <>
+    <ReactLenis root>
       <Navbar />
       <Hero />
       <About />
@@ -20,6 +21,6 @@ export default function App() {
       <Testimonials />
       <Contact />
       <Footer />
-    </>
+    </ReactLenis>
   )
 }

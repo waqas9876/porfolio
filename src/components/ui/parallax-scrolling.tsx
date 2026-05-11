@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from '@studio-freight/lenis';
 
 export function ParallaxComponent() {
   const parallaxRef = useRef<HTMLDivElement>(null);
@@ -38,16 +37,8 @@ export function ParallaxComponent() {
       });
     }
 
-    const lenis = new Lenis();
-    lenis.on('scroll', ScrollTrigger.update);
-    const lenisUpdate = (time: number) => { lenis.raf(time * 1000); };
-    gsap.ticker.add(lenisUpdate);
-    gsap.ticker.lagSmoothing(0);
-
     return () => {
       tl?.kill();
-      gsap.ticker.remove(lenisUpdate);
-      lenis.destroy();
     };
   }, []);
 

@@ -143,7 +143,7 @@ section:nth-child(even) { background: var(--bg2); }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 
 /* ─── Skills Full-width ─────────────────────────────────── */
-.skills-fw-section { padding: 0; background: var(--bg2); overflow: visible; }
+.skills-fw-section { padding: 0; background: var(--bg2); overflow: visible; position: relative; }
 .skills-fw-header  { text-align: center; padding: 4rem 5% 3rem; display: flex; flex-direction: column; align-items: center; gap: 1rem; }
 .skills-fw-title   { font-size: clamp(1.9rem, 3.5vw, 2.8rem); font-weight: 800; letter-spacing: -1px; line-height: 1.15; color: var(--text); margin: 0.2rem 0 0; max-width: 640px; }
 .skills-fw-desc    { font-size: 1rem; color: var(--muted); line-height: 1.75; max-width: 540px; }

@@ -86,7 +86,7 @@ export default function Testimonials() {
         <div
           className="flex flex-row items-center gap-4"
           style={{
-            transform: 'translateX(-100px) translateY(0px) translateZ(-100px) rotateX(20deg) rotateY(-10deg) rotateZ(20deg)',
+            transform: 'translateX(0px) translateY(0px) translateZ(-100px) rotateX(20deg) rotateY(0deg) rotateZ(20deg)',
           }}
         >
           <Marquee vertical pauseOnHover repeat={3} className="[--duration:35s]">

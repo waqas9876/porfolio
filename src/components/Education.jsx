@@ -1,98 +1,49 @@
-import FlowArt, { FlowSection } from '@/components/ui/story-scroll'
+import { useEffect, useRef } from 'react'
+
+const EDUCATION = [
+  { icon: '🎓', degree: 'Bachelor of Computer Science', school: 'Riphah International University', year: '2019 – 2023' },
+  { icon: '📚', degree: 'Intermediate (FSc)', school: 'Superior College', year: '2017 – 2019' },
+]
 
 export default function Education() {
+  const sectionRef = useRef(null)
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, i) => {
+        if (entry.isIntersecting) {
+          setTimeout(() => entry.target.classList.add('visible'), i * 80)
+          observer.unobserve(entry.target)
+        }
+      })
+    }, { threshold: 0.12 })
+    sectionRef.current?.querySelectorAll('.reveal').forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
+  const CalIcon = () => (
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" style={{width:14,height:14}}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+    </svg>
+  )
+
   return (
-    <section id="education" style={{ padding: 0 }}>
-      <FlowArt aria-label="Education">
-
-        <FlowSection aria-label="Academic Background" style={{ backgroundColor: '#0d0d0d', color: '#fff' }}>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/50">Academic Background</p>
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.12)', margin: '2vw 0' }} />
-          <div>
-            <h2 style={{ fontSize: 'clamp(3.5rem,12vw,14rem)', fontWeight: 800, lineHeight: 0.85, textTransform: 'uppercase', letterSpacing: '-0.03em' }}>
-              Education
-            </h2>
-          </div>
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.12)', margin: '2vw 0' }} />
-          <p style={{ maxWidth: '50ch', fontSize: 'clamp(1rem,2.5vw,2rem)', lineHeight: 1.6, color: 'rgba(255,255,255,0.65)' }}>
-            Formally trained in Computer Science with a strong foundation in software engineering,
-            algorithms, and modern web development.
-          </p>
-        </FlowSection>
-
-        <FlowSection aria-label="Bachelor's Degree" style={{ backgroundColor: '#111827', color: '#fff' }}>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/50">01 — University</p>
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.12)', margin: '2vw 0' }} />
-          <div>
-            <h2 style={{ fontSize: 'clamp(3.5rem,10vw,12rem)', fontWeight: 800, lineHeight: 0.85, textTransform: 'uppercase', letterSpacing: '-0.03em' }}>
-              Bachelor<br />of CS
-            </h2>
-          </div>
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.12)', margin: '2vw 0' }} />
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3vw' }}>
-            <div style={{ minWidth: 180, flex: 1 }}>
-              <p style={{ marginBottom: 8, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Institution</p>
-              <p style={{ fontSize: 'clamp(0.85rem,1.3vw,1.05rem)', lineHeight: 1.6, opacity: 0.7 }}>
-                Riphah International University
-              </p>
+    <section id="education" ref={sectionRef}>
+      <div className="container">
+        <p className="section-label reveal">Academic Background</p>
+        <h2 className="section-title reveal">Education</h2>
+        <p className="section-sub reveal">My formal academic qualifications.</p>
+        <div className="edu-grid">
+          {EDUCATION.map((e, i) => (
+            <div key={i} className="edu-card reveal">
+              <div className="edu-icon">{e.icon}</div>
+              <div className="edu-degree">{e.degree}</div>
+              <div className="edu-school">{e.school}</div>
+              <div className="edu-year"><CalIcon />{e.year}</div>
             </div>
-            <div style={{ minWidth: 180, flex: 1 }}>
-              <p style={{ marginBottom: 8, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Duration</p>
-              <p style={{ fontSize: 'clamp(0.85rem,1.3vw,1.05rem)', lineHeight: 1.6, opacity: 0.7 }}>
-                2019 – 2023
-              </p>
-            </div>
-            <div style={{ minWidth: 180, flex: 1 }}>
-              <p style={{ marginBottom: 8, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Degree</p>
-              <p style={{ fontSize: 'clamp(0.85rem,1.3vw,1.05rem)', lineHeight: 1.6, opacity: 0.7 }}>
-                Bachelor of Computer Science
-              </p>
-            </div>
-          </div>
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.12)', margin: '2vw 0' }} />
-          <p style={{ maxWidth: '50ch', fontSize: 'clamp(1rem,2.5vw,2rem)', lineHeight: 1.6, color: 'rgba(255,255,255,0.65)' }}>
-            Four years of deep study in software engineering, data structures, algorithms,
-            databases, and modern web technologies — building the foundation for everything I build today.
-          </p>
-        </FlowSection>
-
-        <FlowSection aria-label="Intermediate" style={{ backgroundColor: '#1a1a2e', color: '#fff' }}>
-          <p className="text-xs font-bold uppercase tracking-[0.2em] text-white/50">02 — College</p>
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.12)', margin: '2vw 0' }} />
-          <div>
-            <h2 style={{ fontSize: 'clamp(3.5rem,10vw,12rem)', fontWeight: 800, lineHeight: 0.85, textTransform: 'uppercase', letterSpacing: '-0.03em' }}>
-              Inter<br />mediate
-            </h2>
-          </div>
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.12)', margin: '2vw 0' }} />
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '3vw' }}>
-            <div style={{ minWidth: 180, flex: 1 }}>
-              <p style={{ marginBottom: 8, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Institution</p>
-              <p style={{ fontSize: 'clamp(0.85rem,1.3vw,1.05rem)', lineHeight: 1.6, opacity: 0.7 }}>
-                Superior College
-              </p>
-            </div>
-            <div style={{ minWidth: 180, flex: 1 }}>
-              <p style={{ marginBottom: 8, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Duration</p>
-              <p style={{ fontSize: 'clamp(0.85rem,1.3vw,1.05rem)', lineHeight: 1.6, opacity: 0.7 }}>
-                2017 – 2019
-              </p>
-            </div>
-            <div style={{ minWidth: 180, flex: 1 }}>
-              <p style={{ marginBottom: 8, fontSize: '0.8rem', fontWeight: 700, textTransform: 'uppercase', letterSpacing: '0.12em' }}>Stream</p>
-              <p style={{ fontSize: 'clamp(0.85rem,1.3vw,1.05rem)', lineHeight: 1.6, opacity: 0.7 }}>
-                FSc — Pre-Engineering
-              </p>
-            </div>
-          </div>
-          <hr style={{ border: 'none', borderTop: '1px solid rgba(255,255,255,0.12)', margin: '2vw 0' }} />
-          <p style={{ maxWidth: '50ch', fontSize: 'clamp(1rem,2.5vw,2rem)', lineHeight: 1.6, color: 'rgba(255,255,255,0.65)', marginTop: 'auto', marginLeft: 'auto', textAlign: 'right' }}>
-            A rigorous pre-engineering curriculum that sharpened analytical thinking and
-            laid the groundwork for a career in technology.
-          </p>
-        </FlowSection>
-
-      </FlowArt>
+          ))}
+        </div>
+      </div>
     </section>
   )
 }

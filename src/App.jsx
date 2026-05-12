@@ -1,5 +1,4 @@
 import ReactLenis from 'lenis/react'
-import { SilkBackground } from './components/ui/silk-background-animation'
 import Navbar from './components/Navbar'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -13,7 +12,6 @@ import Footer from './components/Footer'
 export default function App() {
   return (
     <ReactLenis root>
-      <SilkBackground />
       <Navbar />
       <Hero />
       <About />

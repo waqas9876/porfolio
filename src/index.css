@@ -1,5 +1,26 @@
 @import "tailwindcss";
 
+@theme inline {
+  --animate-marquee: marquee var(--duration) infinite linear;
+  --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite;
+  --color-background: #0d0d0d;
+  --color-foreground: #e8e8e8;
+  --color-card: #161616;
+  --color-card-foreground: #e8e8e8;
+  --color-muted: #1e1e1e;
+  --color-muted-foreground: #888888;
+  --color-border: #272727;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-100% - var(--gap))); }
+}
+@keyframes marquee-vertical {
+  from { transform: translateY(0); }
+  to   { transform: translateY(calc(-100% - var(--gap))); }
+}
+
 /* ─── Reset & Base ─────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 

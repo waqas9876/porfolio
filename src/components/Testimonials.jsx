@@ -1,107 +1,112 @@
-import { useState, useEffect, useRef } from 'react'
+import { Marquee } from '@/components/ui/3d-testimonials'
+import { Card, CardContent } from '@/components/ui/card'
+import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar'
 
 const TESTIMONIALS = [
-  { img: 'https://i.pravatar.cc/128?img=47', name: 'Sarah M.', role: 'CEO @ GreenLeaf Studio', quote: '"Waqas delivered our WordPress site ahead of schedule. Clean code, great communication, and he genuinely understood our brand vision from day one."' },
-  { img: 'https://i.pravatar.cc/128?img=12', name: 'Ahmed K.', role: 'CTO @ TechBridge Solutions', quote: '"We hired Waqas to rebuild our outdated PHP backend. The new system is blazing fast and has been rock-solid for over a year with zero downtime."' },
-  { img: 'https://i.pravatar.cc/128?img=32', name: 'Priya S.', role: 'Product Manager @ DigitalFlow', quote: '"Outstanding frontend work. The responsive design Waqas built looks flawless on every device. He pays close attention to detail and delivers quality."' },
+  {
+    name: 'Sarah M.',
+    username: '@sarahm',
+    role: 'CEO @ GreenLeaf Studio',
+    body: 'Waqas delivered our WordPress site ahead of schedule. Clean code, great communication, and he genuinely understood our brand vision from day one.',
+    img: 'https://i.pravatar.cc/128?img=47',
+  },
+  {
+    name: 'Ahmed K.',
+    username: '@ahmedk',
+    role: 'CTO @ TechBridge Solutions',
+    body: 'We hired Waqas to rebuild our outdated PHP backend. The new system is blazing fast and has been rock-solid for over a year with zero downtime.',
+    img: 'https://i.pravatar.cc/128?img=12',
+  },
+  {
+    name: 'Priya S.',
+    username: '@priyas',
+    role: 'Product Manager @ DigitalFlow',
+    body: 'Outstanding frontend work. The responsive design Waqas built looks flawless on every device. He pays close attention to detail and delivers quality.',
+    img: 'https://i.pravatar.cc/128?img=32',
+  },
+  {
+    name: 'James R.',
+    username: '@jamesr',
+    role: 'Founder @ Launchpad Co.',
+    body: 'Waqas built our Shopify store from scratch. The UX is intuitive, conversion rates improved by 30%, and he was a pleasure to work with throughout.',
+    img: 'https://i.pravatar.cc/128?img=53',
+  },
+  {
+    name: 'Lena W.',
+    username: '@lenaw',
+    role: 'Marketing Director @ BrightMark',
+    body: 'Fast turnaround, pixel-perfect execution. Waqas takes ownership of his work and proactively flags issues before they become problems.',
+    img: 'https://i.pravatar.cc/128?img=25',
+  },
+  {
+    name: 'Omar F.',
+    username: '@omarf',
+    role: 'Lead Dev @ NexaCore',
+    body: 'Solid Laravel developer. Waqas wrote clean, well-structured code that the whole team could easily maintain. Would hire again without hesitation.',
+    img: 'https://i.pravatar.cc/128?img=68',
+  },
 ]
 
-const POSITIONS = ['pos-front', 'pos-middle', 'pos-back']
-const DRAG_THRESHOLD = 150
-
-export default function Testimonials() {
-  const [order, setOrder] = useState([0, 1, 2])
-  const [dragging, setDragging] = useState(false)
-  const [marginLeft, setMarginLeft] = useState(0)
-  const dragStartX = useRef(0)
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80)
-          observer.unobserve(entry.target)
-        }
-      })
-    }, { threshold: 0.12 })
-    sectionRef.current?.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
-  const shuffle = () => setOrder(([a, b, c]) => [b, c, a])
-
-  const onMouseDown = (e) => {
-    if (order[0] !== parseInt(e.currentTarget.dataset.index)) return
-    dragStartX.current = e.clientX
-    setDragging(true)
-  }
-  const onMouseMove = (e) => {
-    if (!dragging) return
-    setMarginLeft((e.clientX - dragStartX.current) * 0.25)
-  }
-  const onMouseUp = (e) => {
-    if (!dragging) return
-    setDragging(false)
-    setMarginLeft(0)
-    if (dragStartX.current - e.clientX > DRAG_THRESHOLD) shuffle()
-  }
-  const onTouchStart = (e) => {
-    if (order[0] !== parseInt(e.currentTarget.dataset.index)) return
-    dragStartX.current = e.touches[0].clientX
-    setDragging(true)
-  }
-  const onTouchMove = (e) => {
-    if (!dragging) return
-    setMarginLeft((e.touches[0].clientX - dragStartX.current) * 0.25)
-  }
-  const onTouchEnd = (e) => {
-    if (!dragging) return
-    setDragging(false)
-    setMarginLeft(0)
-    if (dragStartX.current - e.changedTouches[0].clientX > DRAG_THRESHOLD) shuffle()
-  }
-
+function TestimonialCard({ img, name, username, role, body }) {
   return (
-    <section id="testimonials" ref={sectionRef}>
-      <div className="container">
-        <p className="section-label reveal" style={{textAlign:'center'}}>Client Feedback</p>
-        <h2 className="section-title reveal" style={{textAlign:'center'}}>What People Say</h2>
-        <p className="section-sub reveal" style={{margin:'0 auto 3rem',textAlign:'center'}}>
-          Kind words from clients and colleagues I&apos;ve had the pleasure of working with.
-        </p>
-        <div className="tstack-wrap">
-          <div className="tstack-outer">
-            <div className="tstack" id="tstack">
-              {TESTIMONIALS.map((t, idx) => {
-                const posIdx = order.indexOf(idx)
-                const isFront = posIdx === 0
-                return (
-                  <div
-                    key={idx}
-                    data-index={idx}
-                    className={`tcard ${POSITIONS[posIdx]}${dragging && isFront ? ' is-dragging' : ''}`}
-                    style={isFront && dragging ? { marginLeft: marginLeft + 'px' } : {}}
-                    onMouseDown={onMouseDown}
-                    onMouseMove={onMouseMove}
-                    onMouseUp={onMouseUp}
-                    onTouchStart={onTouchStart}
-                    onTouchMove={onTouchMove}
-                    onTouchEnd={onTouchEnd}
-                  >
-                    <img className="tcard-avatar" src={t.img} alt={t.name} />
-                    <p className="tcard-quote">{t.quote}</p>
-                    <span className="tcard-author">{t.name} — {t.role}</span>
-                  </div>
-                )
-              })}
-            </div>
-          </div>
-          <div className="tstack-hint">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" /></svg>
-            Drag the top card left to shuffle
+    <Card className="w-[220px] border-[#272727] bg-[#161616]">
+      <CardContent className="pt-6">
+        <div className="flex items-center gap-2.5">
+          <Avatar className="size-9">
+            <AvatarImage src={img} alt={name} />
+            <AvatarFallback className="bg-[#222] text-white text-xs">{name[0]}</AvatarFallback>
+          </Avatar>
+          <div className="flex flex-col">
+            <figcaption className="text-sm font-semibold text-white leading-tight">{name}</figcaption>
+            <p className="text-xs text-[#888]">{username}</p>
           </div>
         </div>
+        <blockquote className="mt-3 text-sm text-[#aaa] leading-relaxed">{body}</blockquote>
+        <p className="mt-2 text-[10px] text-[#555] uppercase tracking-wider">{role}</p>
+      </CardContent>
+    </Card>
+  )
+}
+
+export default function Testimonials() {
+  return (
+    <section id="testimonials" style={{ padding: '4rem 0', overflow: 'hidden' }}>
+      <div className="container" style={{ margin: '0 auto', padding: '0 5%', textAlign: 'center' }}>
+        <p className="section-label">Client Feedback</p>
+        <h2 className="section-title">What People Say</h2>
+        <p className="section-sub" style={{ margin: '0 auto 3rem' }}>
+          Kind words from clients and colleagues I've had the pleasure of working with.
+        </p>
+      </div>
+
+      <div
+        className="relative flex h-[420px] w-full flex-row items-center justify-center overflow-hidden gap-1.5"
+        style={{ perspective: '300px' }}
+      >
+        <div
+          className="flex flex-row items-center gap-4"
+          style={{
+            transform: 'translateX(-100px) translateY(0px) translateZ(-100px) rotateX(20deg) rotateY(-10deg) rotateZ(20deg)',
+          }}
+        >
+          <Marquee vertical pauseOnHover repeat={3} className="[--duration:35s]">
+            {TESTIMONIALS.map((t) => <TestimonialCard key={t.username} {...t} />)}
+          </Marquee>
+          <Marquee vertical pauseOnHover reverse repeat={3} className="[--duration:35s]">
+            {TESTIMONIALS.map((t) => <TestimonialCard key={t.username} {...t} />)}
+          </Marquee>
+          <Marquee vertical pauseOnHover repeat={3} className="[--duration:35s]">
+            {TESTIMONIALS.map((t) => <TestimonialCard key={t.username} {...t} />)}
+          </Marquee>
+          <Marquee vertical pauseOnHover reverse repeat={3} className="[--duration:35s]">
+            {TESTIMONIALS.map((t) => <TestimonialCard key={t.username} {...t} />)}
+          </Marquee>
+        </div>
+
+        <div className="pointer-events-none absolute inset-x-0 top-0 h-1/4 bg-gradient-to-b from-[#0d0d0d]" />
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#0d0d0d]" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-[#0d0d0d]" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-[#0d0d0d]" />
       </div>
     </section>
   )

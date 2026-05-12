@@ -80,7 +80,7 @@ export default function Testimonials() {
       </div>
 
       <div
-        className="relative flex h-[420px] w-full flex-row items-center justify-center overflow-hidden gap-1.5"
+        className="relative flex h-[700px] w-full flex-row items-center justify-center overflow-hidden gap-1.5"
         style={{ perspective: '300px' }}
       >
         <div

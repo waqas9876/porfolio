@@ -1,49 +1,41 @@
-import { useEffect, useRef } from 'react'
+import { StickyFeatureSection } from '@/components/ui/sticky-scroll-cards-section'
 
-const EDUCATION = [
-  { icon: '🎓', degree: 'Bachelor of Computer Science', school: 'Riphah International University', year: '2019 – 2023' },
-  { icon: '📚', degree: 'Intermediate (FSc)', school: 'Superior College', year: '2017 – 2019' },
+const CARDS = [
+  {
+    label: '01 — University',
+    title: 'Bachelor of Computer Science',
+    description: 'Graduated from Riphah International University (2019–2023) with a degree in Computer Science. Four years of intensive study covering software engineering, data structures, algorithms, OOP, databases, and modern web development — the foundation behind every project I build.',
+    imageUrl: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?auto=format&fit=crop&w=900&q=80',
+    bgColor: 'bg-amber-100',
+    textColor: 'text-gray-700',
+  },
+  {
+    label: '02 — College',
+    title: 'Intermediate (FSc)',
+    description: 'Completed FSc Pre-Engineering at Superior College (2017–2019). A rigorous two-year curriculum that sharpened analytical and mathematical thinking, laying the groundwork for a career in technology and software engineering.',
+    imageUrl: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?auto=format&fit=crop&w=900&q=80',
+    bgColor: 'bg-orange-100',
+    textColor: 'text-gray-700',
+  },
+  {
+    label: '03 — In Practice',
+    title: '4+ Years of Real-World Experience',
+    description: 'Since graduating in 2023, I have delivered 30+ projects across WordPress, Shopify, Laravel, React, and PHP — turning academic foundations into measurable results for clients worldwide. Continuous self-learning keeps my skills ahead of the curve.',
+    imageUrl: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80',
+    bgColor: 'bg-yellow-100',
+    textColor: 'text-gray-700',
+  },
 ]
 
 export default function Education() {
-  const sectionRef = useRef(null)
-
-  useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
-          setTimeout(() => entry.target.classList.add('visible'), i * 80)
-          observer.unobserve(entry.target)
-        }
-      })
-    }, { threshold: 0.12 })
-    sectionRef.current?.querySelectorAll('.reveal').forEach(el => observer.observe(el))
-    return () => observer.disconnect()
-  }, [])
-
-  const CalIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={2} stroke="currentColor" style={{width:14,height:14}}>
-      <path strokeLinecap="round" strokeLinejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
-    </svg>
-  )
-
   return (
-    <section id="education" ref={sectionRef}>
-      <div className="container">
-        <p className="section-label reveal">Academic Background</p>
-        <h2 className="section-title reveal">Education</h2>
-        <p className="section-sub reveal">My formal academic qualifications.</p>
-        <div className="edu-grid">
-          {EDUCATION.map((e, i) => (
-            <div key={i} className="edu-card reveal">
-              <div className="edu-icon">{e.icon}</div>
-              <div className="edu-degree">{e.degree}</div>
-              <div className="edu-school">{e.school}</div>
-              <div className="edu-year"><CalIcon />{e.year}</div>
-            </div>
-          ))}
-        </div>
-      </div>
+    <section id="education" style={{ padding: 0 }}>
+      <StickyFeatureSection
+        label="Academic Background"
+        title="Education"
+        subtitle="My formal qualifications and the real-world experience built on top of them."
+        cards={CARDS}
+      />
     </section>
   )
 }

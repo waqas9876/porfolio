@@ -36,6 +36,13 @@
   --accent:    #f0f0f0;
   --radius:    12px;
   --nav-h:     64px;
+
+  /* shadcn/motion-footer aliases */
+  --foreground:        #e8e8e8;
+  --background:        #0d0d0d;
+  --secondary:         #a0a0a0;
+  --destructive:       #ef4444;
+  --muted-foreground:  #888888;
 }
 
 html { scroll-behavior: auto; overflow-x: hidden; }
@@ -477,4 +484,31 @@ footer { position: relative; background: var(--card); border-radius: 24px; overf
   .hf-socials { gap: 1rem; }
   .hf-col-title { font-size: 0.9rem; }
   .nav-logo { font-size: 1.1rem; }
+}
+
+/* ─── Mobile dynamic viewport height ───────────────────── */
+@media (max-width: 768px) {
+  #about { height: 100svh; }
+}
+
+/* ─── Work gallery height on small screens ──────────────── */
+@media (max-width: 640px) {
+  .work-ag-scroll { height: 200vh; }
+  .ca-grid-bg { background-size: 30px 30px; }
+}
+
+/* ─── Tablet portrait Experience cards (600–767px) ──────── */
+@media (min-width: 600px) and (max-width: 767px) {
+  .exp-card { width: 240px; height: 330px; }
+}
+
+/* ─── Reduced motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transition: none; }
+  .exp-card-wrap,
+  .edu-card,
+  .tcard { transition: none !important; }
+  @keyframes hintPulse { 0%, 100% { opacity: 0.5; } }
+  @keyframes galleryBounce { 0%, 100% { transform: none; } }
+  @keyframes caPulse { 0%, 100% { box-shadow: 0 0 4px rgba(34,197,94,0.6); } }
 }

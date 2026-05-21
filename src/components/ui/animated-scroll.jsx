@@ -105,7 +105,7 @@ export default function ScrollAdventure({ pages }) {
 
   // ── Render ────────────────────────────────────────────
   return (
-    <div ref={sectionRef} className="relative overflow-hidden h-screen bg-black">
+    <div ref={sectionRef} className="relative overflow-hidden bg-black" style={{ height: '100svh' }}>
 
       {/* Dot navigation */}
       <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-50 flex gap-2">
@@ -143,9 +143,9 @@ export default function ScrollAdventure({ pages }) {
         return (
           <div key={idx} className="absolute inset-0">
 
-            {/* Left Half */}
+            {/* Left Half — full-width on mobile if it has content, hidden if it's decorative-only */}
             <div
-              className="absolute top-0 left-0 w-1/2 h-full transition-transform duration-[1000ms] ease-in-out"
+              className={`absolute top-0 left-0 h-full transition-transform duration-[1000ms] ease-in-out ${page.leftContent ? 'w-full sm:w-1/2' : 'hidden sm:block sm:w-1/2'}`}
               style={{ transform: leftTrans }}
             >
               <div
@@ -155,7 +155,7 @@ export default function ScrollAdventure({ pages }) {
                   backgroundColor: page.leftBgImage ? undefined : '#0d0d0d',
                 }}
               >
-                <div className="flex flex-col items-center justify-center h-full text-white p-10">
+                <div className="flex flex-col items-center justify-center h-full text-white p-8 sm:p-10">
                   {page.leftContent && (
                     <div className="max-w-sm text-center">
                       {page.leftContent.label && (
@@ -163,17 +163,19 @@ export default function ScrollAdventure({ pages }) {
                           {page.leftContent.label}
                         </p>
                       )}
-                      <h2 className="text-3xl md:text-4xl font-black uppercase leading-tight mb-5 tracking-tight">
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase leading-tight mb-4 tracking-tight">
                         {page.leftContent.heading}
                       </h2>
-                      <p className="text-base text-white/70 leading-relaxed">
+                      <p className="text-sm sm:text-base text-white/70 leading-relaxed">
                         {page.leftContent.description}
                       </p>
                       {page.leftContent.cta && (
                         <a
                           href={page.leftContent.cta.href}
-                          onClick={(e) => { e.preventDefault(); unlock(); setTimeout(() => document.querySelector(page.leftContent.cta.href)?.scrollIntoView({ behavior: 'smooth' }), 600) }}
-                          className="inline-flex items-center gap-2 mt-7 px-6 py-3 bg-white text-black font-bold text-sm rounded-lg hover:bg-white/90 transition"
+                          target={page.leftContent.cta.external ? '_blank' : undefined}
+                          rel={page.leftContent.cta.external ? 'noreferrer' : undefined}
+                          onClick={page.leftContent.cta.external ? undefined : (e) => { e.preventDefault(); unlock(); setTimeout(() => document.querySelector(page.leftContent.cta.href)?.scrollIntoView({ behavior: 'smooth' }), 600) }}
+                          className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 sm:px-6 sm:py-3 bg-white text-black font-bold text-xs sm:text-sm rounded-lg hover:bg-white/90 transition"
                         >
                           {page.leftContent.cta.label}
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -185,9 +187,9 @@ export default function ScrollAdventure({ pages }) {
               </div>
             </div>
 
-            {/* Right Half */}
+            {/* Right Half — full-width on mobile if it has content, hidden if it's decorative-only */}
             <div
-              className="absolute top-0 left-1/2 w-1/2 h-full transition-transform duration-[1000ms] ease-in-out"
+              className={`absolute top-0 h-full transition-transform duration-[1000ms] ease-in-out ${page.rightContent ? 'w-full left-0 sm:left-1/2 sm:w-1/2' : 'hidden sm:block w-1/2 left-1/2'}`}
               style={{ transform: rightTrans }}
             >
               <div
@@ -197,7 +199,7 @@ export default function ScrollAdventure({ pages }) {
                   backgroundColor: page.rightBgImage ? undefined : '#111111',
                 }}
               >
-                <div className="flex flex-col items-center justify-center h-full text-white p-10">
+                <div className="flex flex-col items-center justify-center h-full text-white p-8 sm:p-10">
                   {page.rightContent && (
                     <div className="max-w-sm text-center">
                       {page.rightContent.label && (
@@ -205,17 +207,19 @@ export default function ScrollAdventure({ pages }) {
                           {page.rightContent.label}
                         </p>
                       )}
-                      <h2 className="text-3xl md:text-4xl font-black uppercase leading-tight mb-5 tracking-tight">
+                      <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase leading-tight mb-4 tracking-tight">
                         {page.rightContent.heading}
                       </h2>
-                      <p className="text-base text-white/70 leading-relaxed">
+                      <p className="text-sm sm:text-base text-white/70 leading-relaxed">
                         {page.rightContent.description}
                       </p>
                       {page.rightContent.cta && (
                         <a
                           href={page.rightContent.cta.href}
-                          onClick={(e) => { e.preventDefault(); unlock(); setTimeout(() => document.querySelector(page.rightContent.cta.href)?.scrollIntoView({ behavior: 'smooth' }), 600) }}
-                          className="inline-flex items-center gap-2 mt-7 px-6 py-3 bg-white text-black font-bold text-sm rounded-lg hover:bg-white/90 transition"
+                          target={page.rightContent.cta.external ? '_blank' : undefined}
+                          rel={page.rightContent.cta.external ? 'noreferrer' : undefined}
+                          onClick={page.rightContent.cta.external ? undefined : (e) => { e.preventDefault(); unlock(); setTimeout(() => document.querySelector(page.rightContent.cta.href)?.scrollIntoView({ behavior: 'smooth' }), 600) }}
+                          className="inline-flex items-center gap-2 mt-6 px-5 py-2.5 sm:px-6 sm:py-3 bg-white text-black font-bold text-xs sm:text-sm rounded-lg hover:bg-white/90 transition"
                         >
                           {page.rightContent.cta.label}
                           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>

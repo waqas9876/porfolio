@@ -42,7 +42,7 @@ export default function Work() {
           built with performance, design, and real results in mind.
         </p>
         <div className="work-ag-btns">
-          <a href="mailto:mwaqasjaved2300@gmail.com" className="work-ag-btn-primary">
+          <a href="https://wa.me/923279700070" target="_blank" rel="noreferrer" className="work-ag-btn-primary">
             <MailIcon size={16} />
             Hire Me
           </a>

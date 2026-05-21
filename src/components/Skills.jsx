@@ -49,7 +49,7 @@ const PAGES = [
       label: "Let's Connect",
       heading: "Ready To Build Something Great?",
       description: '4+ years of experience delivering real results. Let\'s work together on your next project.',
-      cta: { label: "Hire Me", href: '#contact' },
+      cta: { label: "Hire Me", href: 'https://wa.me/923279700070', external: true },
     },
   },
 ]

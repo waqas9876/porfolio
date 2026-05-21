@@ -1,3 +1,5 @@
+import { useCallback, useEffect, useRef } from 'react'
+import { useLenis } from 'lenis/react'
 import { HeroParallax } from '@/components/ui/hero-parallax'
 
 const PROJECTS = [
@@ -94,8 +96,93 @@ const PROJECTS = [
 ]
 
 export default function Projects() {
+  const sectionRef = useRef(null)
+  const lenis = useLenis()
+  const locked = useRef(false)
+  const exiting = useRef(false)
+
+  const lock = useCallback(() => {
+    if (locked.current) return
+    locked.current = true
+    lenis?.stop()
+    if (sectionRef.current) {
+      // snap to section top
+      const top = sectionRef.current.offsetTop
+      window.scrollTo({ top, behavior: 'instant' })
+    }
+  }, [lenis])
+
+  const unlock = useCallback(() => {
+    locked.current = false
+    exiting.current = true
+    lenis?.start()
+    setTimeout(() => { exiting.current = false }, 1500)
+  }, [lenis])
+
+  // Lock when section enters viewport from below (scrolling down into it)
+  useEffect(() => {
+    const el = sectionRef.current
+    if (!el) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !exiting.current) {
+          const fromBottom = entry.boundingClientRect.top > 0
+          if (fromBottom) lock()
+        } else if (!entry.isIntersecting) {
+          locked.current = false
+          lenis?.start()
+        }
+      },
+      { threshold: 0.1 }
+    )
+    observer.observe(el)
+    return () => { observer.disconnect(); lenis?.start() }
+  }, [lenis, lock])
+
+  // Wheel handler: while locked, manually advance scroll through the section
+  const handleWheel = useCallback((e) => {
+    if (!locked.current) return
+
+    const el = sectionRef.current
+    if (!el) return
+
+    const sectionTop = el.offsetTop
+    const sectionHeight = el.offsetHeight
+    const viewportHeight = window.innerHeight
+    const currentScroll = window.scrollY
+
+    // Scrolling up at section top → release upward
+    if (e.deltaY < 0 && currentScroll <= sectionTop + 10) {
+      unlock()
+      return
+    }
+
+    // Scrolling down past section bottom → release downward
+    const sectionEnd = sectionTop + sectionHeight
+    if (e.deltaY > 0 && currentScroll >= sectionEnd - viewportHeight - 50) {
+      unlock()
+      return
+    }
+
+    // Trap: manually drive scroll within the section
+    e.preventDefault()
+    e.stopPropagation()
+
+    const next = Math.max(sectionTop, Math.min(sectionEnd - viewportHeight, currentScroll + e.deltaY * 0.9))
+    window.scrollTo({ top: next, behavior: 'instant' })
+  }, [unlock])
+
+  useEffect(() => {
+    window.addEventListener('wheel', handleWheel, { passive: false })
+    return () => window.removeEventListener('wheel', handleWheel)
+  }, [handleWheel])
+
   return (
-    <section id="projects" style={{ padding: 0, background: 'var(--bg)' }}>
+    <section
+      id="projects"
+      ref={sectionRef}
+      style={{ padding: 0, background: 'var(--bg)', marginTop: '4rem' }}
+    >
       <HeroParallax products={PROJECTS} />
     </section>
   )
